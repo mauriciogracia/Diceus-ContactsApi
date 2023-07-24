@@ -1,0 +1,22 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/Diceus/FileContentIndex
+/.vs/Diceus/v17
+/.vs/Diceus/DesignTimeBuild
+/.vs/ProjectEvaluation
+/ApiTests/bin/Debug/net6.0
+/ApiTests/obj
+**/packages/*
+!**/packages/repositories.config
+**/Debug/*
+SiteASP/SiteASP.v12.suo
+/SiteASP/SiteASP.v12.suo
+/RequestModels/bin/Release
+/RequestModels/obj/Release
+/SiteCore/wwwroot
+/SiteCore/obj/project.assets.json
+/SiteCore/obj/project.nuget.cache
+/SiteCore/obj/SiteCore.csproj.nuget.dgspec.json
+/SiteCore/obj/SiteCore.csproj.nuget.g.props
