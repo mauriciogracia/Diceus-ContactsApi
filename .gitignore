@@ -25,3 +25,8 @@ SiteASP/SiteASP.v12.suo
 /.vs/ContactsApi/FileContentIndex
 /.vs/ContactsApi/config
 /DeployNotes.txt
+/ApiTests/bin/Release/net6.0
+/RequestModel2/obj/Release/netstandard2.0
+/RequestModel2/bin/Release/netstandard2.0
+/RequestModel/bin/Release/netstandard2.0
+/RequestModel/obj

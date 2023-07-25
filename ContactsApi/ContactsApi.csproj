@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RequestModel2\RequestModel.csproj" />
+    <ProjectReference Include="..\RequestModel\RequestModel.csproj" />
   </ItemGroup>
 
 </Project>
