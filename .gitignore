@@ -20,3 +20,7 @@ SiteASP/SiteASP.v12.suo
 /SiteCore/obj/project.nuget.cache
 /SiteCore/obj/SiteCore.csproj.nuget.dgspec.json
 /SiteCore/obj/SiteCore.csproj.nuget.g.props
+/.vs/ContactsApi/DesignTimeBuild
+/.vs/ContactsApi/v17
+/.vs/ContactsApi/FileContentIndex
+/.vs/ContactsApi/config
