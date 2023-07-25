@@ -1,7 +1,0 @@
-sql-server-mgg.database.windows.net
-sqluser
-continue1!
-
-git CI/CD
-mauriciogracia
-Continue1!
