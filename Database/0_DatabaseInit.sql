@@ -25,6 +25,21 @@ CREATE TABLE CONTACTS (
 );
 GO
 
+-- Create the SESSIONS table
+CREATE TABLE SESSIONS (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    token NVARCHAR(255) NOT NULL,
+    userId INT NOT NULL,
+    CONSTRAINT FK_SESSIONS_USERS FOREIGN KEY (userId) REFERENCES USERS(id)
+);
+
+-- Create the SESSIONS table with token as the primary key
+CREATE TABLE SESSIONS (
+    token NVARCHAR(255) PRIMARY KEY,
+    userId INT NOT NULL,
+    CONSTRAINT FK_SESSIONS_USERS FOREIGN KEY (userId) REFERENCES USERS(id)
+);
+
 -- Create a hash method for the password (e.g., SHA256)
 -- In a real application, use a more secure hashing algorithm and consider salting the passwords
 -- For .NET Core, you can use the System.Security.Cryptography namespace for hashing.

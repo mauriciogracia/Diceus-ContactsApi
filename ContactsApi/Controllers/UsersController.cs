@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RequestModels;
+using ContactsApi.Models;
 
 namespace ContactsApi.Controllers
 {
@@ -42,7 +43,7 @@ namespace ContactsApi.Controllers
             return isValid;
         }
 
-        private bool IsPasswordValid(string enteredPassword, string savedPassword)
+        private static bool IsPasswordValid(string enteredPassword, string savedPassword)
         {
             // In a real application, use a secure hashing and password verification method.
             // For demonstration purposes only, we are doing a basic string comparison here.
@@ -64,6 +65,65 @@ namespace ContactsApi.Controllers
 
             return (dbUser != null);
         }
-    }
 
+        // POST: api/Users/{userId}/StartSession
+        [HttpPost("{userId}/StartSession")]
+        public IActionResult StartSession(int userId)
+        {
+            // Ensure the user exists
+            var user = _dbContext.Users.Find(userId);
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            // Generate a new session token using Guid.NewGuid()
+            var sessionToken = Guid.NewGuid().ToString();
+
+            // Create a new session record with the generated token
+            var session = new Session
+            {
+                Token = sessionToken,
+                UserId = userId
+            };
+
+            _dbContext.Sessions.Add(session);
+            _dbContext.SaveChanges();
+
+            // Return the generated session token
+            return Ok(sessionToken);
+        }
+
+        // GET: api/Users/GetUserIdBySession
+        [HttpGet("GetUserIdBySession")]
+        public ActionResult<int> GetUserIdBySession(string token)
+        {
+            // Find the session with the given token
+            var session = _dbContext.Sessions.FirstOrDefault(s => s.Token == token);
+
+            // Return the associated userId if session is found, otherwise return -1
+            return session?.UserId ?? -1;
+        }
+
+        // DELETE: api/Users/EndSession
+        [HttpDelete("EndSession")]
+        public IActionResult EndSession(string token)
+        {
+            // Find the session with the given token
+            var session = _dbContext.Sessions.FirstOrDefault(s => s.Token == token);
+
+            if (session != null)
+            {
+                // Remove the session from the database
+                _dbContext.Sessions.Remove(session);
+                _dbContext.SaveChanges();
+
+                return NoContent(); // 204 No Content
+            }
+            else
+            {
+                return NotFound("Session not found");
+            }
+        }
+    }
 }

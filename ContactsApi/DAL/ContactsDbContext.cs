@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ContactsApi.Models;
+using Microsoft.EntityFrameworkCore;
 using RequestModels;
 
 namespace ContactsApi.DAL
@@ -12,6 +13,7 @@ namespace ContactsApi.DAL
 
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Session> Sessions { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Contact>()
