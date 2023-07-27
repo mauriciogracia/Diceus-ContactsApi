@@ -162,7 +162,7 @@ namespace ApiTests
             var usersController = new UsersController(dbContext);
 
             // Act
-            var result = usersController.StartSession(1);
+            var result = usersController.StartSession("user1");
 
             // Assert
             var actionResult = Assert.IsType<OkObjectResult>(result);
@@ -204,35 +204,6 @@ namespace ApiTests
             // Assert
             var actionResult = Assert.IsType<NotFoundObjectResult>(result);
             Assert.Equal("Session not found", actionResult.Value);
-        }
-    }
-
-    public class UsersControllerFixture : IDisposable
-    {
-        public UsersControllerFixture()
-        {
-            // Set up the shared database context and other dependencies here
-            DbContext = SetupDbContext();
-            UsersController = new UsersController(DbContext);
-        }
-
-        public ContactsDbContext DbContext { get; }
-
-        public UsersController UsersController { get; }
-
-        private ContactsDbContext SetupDbContext()
-        {
-            var options = new DbContextOptionsBuilder<ContactsDbContext>()
-                .UseInMemoryDatabase(databaseName: "TestContactsDb")
-                .Options;
-
-            return new ContactsDbContext(options);
-        }
-
-        public void Dispose()
-        {
-            // Clean up resources after all tests in the collection have executed
-            DbContext.Dispose();
         }
     }
 }

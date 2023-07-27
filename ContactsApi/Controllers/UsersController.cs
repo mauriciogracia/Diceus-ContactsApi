@@ -68,29 +68,28 @@ namespace ContactsApi.Controllers
 
         // POST: api/Users/{userId}/StartSession
         [HttpPost("{userId}/StartSession")]
-        public IActionResult StartSession(int userId)
+        public IActionResult StartSession(string username)
         {
-            // Ensure the user exists
-            var user = _dbContext.Users.Find(userId);
+            var user = _dbContext.Users.FirstOrDefault(u => u.Username == username);
+
             if (user == null)
             {
-                return NotFound("User not found");
+                // User with the provided username not found
+                return NotFound();
             }
 
-            // Generate a new session token using Guid.NewGuid()
+            // Generate a new session token (using Guid as an example)
             var sessionToken = Guid.NewGuid().ToString();
 
-            // Create a new session record with the generated token
+            // Create a new session record in the database
             var session = new Session
             {
                 Token = sessionToken,
-                UserId = userId
+                UserId = user.Id
             };
-
             _dbContext.Sessions.Add(session);
             _dbContext.SaveChanges();
 
-            // Return the generated session token
             return Ok(sessionToken);
         }
 
