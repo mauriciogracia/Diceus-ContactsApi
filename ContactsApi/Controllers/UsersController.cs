@@ -66,8 +66,8 @@ namespace ContactsApi.Controllers
             return (dbUser != null);
         }
 
-        // POST: api/Users/{userId}/StartSession
-        [HttpPost("{userId}/StartSession")]
+        // POST: api/Users/{username}/StartSession
+        [HttpPost("{username}/StartSession")]
         public IActionResult StartSession(string username)
         {
             var user = _dbContext.Users.FirstOrDefault(u => u.Username == username);
